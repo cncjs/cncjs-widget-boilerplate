@@ -1,11 +1,15 @@
 import React, { PureComponent } from 'react';
+import styled from 'styled-components';
 import controller from '../../lib/controller';
 import {
     GRBL,
     SMOOTHIE,
     TINYG
 } from '../../constants';
-import styles from './index.styl';
+
+const Container = styled.div`
+    padding: 10px;
+`;
 
 class App extends PureComponent {
     static propTypes = {
@@ -114,11 +118,11 @@ class App extends PureComponent {
         const { port, controller, workflowState } = this.state;
 
         return (
-            <div className={styles.container}>
+            <Container>
                 <div>Port: {port}</div>
                 <div>Controller type: {controller.type}</div>
                 <div>Workflow state: {workflowState}</div>
-            </div>
+            </Container>
         );
     }
 }

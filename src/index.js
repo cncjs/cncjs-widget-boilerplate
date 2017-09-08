@@ -1,5 +1,3 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import controller from './lib/controller';
 import query from './lib/query';
 import log from './lib/log';
@@ -29,23 +27,30 @@ window.addEventListener('message', (event) => {
 });
 
 // Dynamic imports
-const container = params.container || 'App';
+const container = params.container || 'ReactApp';
 import(`./containers/${container}`)
-    .then(({ default: Component }) => {
-        ReactDOM.render(
-            <Component />,
-            document.getElementById('viewport')
-        );
+    .then(c => {
+        const { default: render } = c;
 
+        if (typeof render !== 'function') {
+            log.error(`Expected a function but got ${render}. Check the default export in "containers/${container}".`);
+            return undefined;
+        }
+
+        return render();
+    })
+    .then(() => {
         if (!params.token) {
             return;
         }
 
+        // Connect to a socket.io server
         const host = ''; // e.g. http://localhost:8000
         const options = {
             query: 'token=' + params.token
         };
         controller.connect(host, options, () => {
+            // Post a message to the parent window
             window.parent.postMessage({
                 token: params.token,
                 action: {
@@ -53,4 +58,7 @@ import(`./containers/${container}`)
                 }
             }, '*');
         });
+    })
+    .catch(err => {
+        log.error(err);
     });

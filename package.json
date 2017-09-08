@@ -1,7 +1,7 @@
 {
-  "name": "react-widget-boilerplate",
+  "name": "cncjs-widget-boilerplate",
   "version": "0.1.0",
-  "description": "Create a custom widget with React",
+  "description": "Creating custom widgets for CNCjs.",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -19,19 +19,19 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/cncjs/react-widget-boilerplate.git"
+    "url": "git+https://github.com/cncjs/cncjs-widget-boilerplate.git"
   },
   "author": "nobody <nobody@example.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/cncjs/react-widget-boilerplate/issues"
+    "url": "https://github.com/cncjs/cncjs-widget-boilerplate/issues"
   },
-  "homepage": "https://github.com/cncjs/react-widget-boilerplate",
+  "homepage": "https://github.com/cncjs/cncjs-widget-boilerplate",
   "keywords": [
     "cncjs",
-    "react",
     "widget",
-    "boilerplate"
+    "boilerplate",
+    "react"
   ],
   "peerDependencies": {},
   "dependencies": {
@@ -44,6 +44,7 @@
     "react": "^0.14.0 || ^15.0.0",
     "react-dom": "^0.14.0 || ^15.0.0",
     "socket.io-client": "^1.7.4",
+    "styled-components": "^2.1.2",
     "universal-logger": "^1.0.1",
     "universal-logger-browser": "^1.0.2"
   },
