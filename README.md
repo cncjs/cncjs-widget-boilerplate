@@ -21,9 +21,11 @@ Run `npm run dev` to start a local development server for development and testin
 
 Run `npm run prepublish` to build production code. It will output index.html, fonts, images, and JavaScript files to the dist folder. 
 
-To load a custom widget on CNCjs, you need to copy all files to a directory (e.g. /home/widget), and specify a mount path for the static directory, as shown below:
+To load a custom widget on CNCjs, you need to copy all dist files to a directory (e.g. /home/widget), and specify a mount path for the static directory, as shown below:
 
 ```
+mkdir -p /home/widget
+cp -af /path/to/react-widget-boilerplate/dist/* /home/widget
 cnc -vv --mount /widget:/home/widget
 ```
 
