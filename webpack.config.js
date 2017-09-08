@@ -11,7 +11,7 @@ const timestamp = new Date().getTime();
 const webpackConfig = {
     entry: {
         index: [
-            path.resolve(__dirname, 'src/index.jsx')
+            path.resolve(__dirname, 'src/index.js')
         ]
     },
     output: {
