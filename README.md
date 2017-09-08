@@ -8,25 +8,29 @@ This repository is still under construction and content may change. Do not rely 
 
 ## Installation
 
-```
-npm i -g npm
+```bash
+npm i -g npm # Upgrade NPM to the latest version
 npm install
 ```
 
 ## Development
 
-Run `npm run dev` to start a local development server for development and testing. After that, connect to http://localhost:8000 and wait until bundle finished.
+Run `npm run dev` to start a local development server for development, then connect to http://localhost:5000 and wait until bundle finished.
+
+You can specify a mount path to test your widgets with CNCjs:
+```bash
+cnc -vv --mount /widget:/path/to/cncjs-widget-boilerplate/dist
+```
 
 ## Production
 
 Run `npm run prepublish` to build production code. It will output index.html, fonts, images, and JavaScript files to the dist folder. 
 
-To load a custom widget on CNCjs, you need to copy all dist files to a directory (e.g. /home/widget), and specify a mount path for the static directory, as shown below:
-
-```
+After that, you can copy all dist files to a directory (e.g. /home/widget), and specify a mount path for the static directory, as shown below:
+```bash
 mkdir -p /home/widget
-cp -af /path/to/react-widget-boilerplate/dist/* /home/widget
-cnc -vv --mount /widget:/home/widget
+cp -af /path/to/cncjs-widget-boilerplate/dist/* /home/widget
+cnc --mount /widget:/home/widget
 ```
 
 ## License
