@@ -27,13 +27,13 @@ window.addEventListener('message', (event) => {
 });
 
 // Dynamic imports
-const container = params.container || 'ReactApp';
-import(`./containers/${container}`)
-    .then(c => {
-        const { default: render } = c;
+const widget = params.widget || 'ReactApp';
+import(`./widgets/${widget}`)
+    .then(m => {
+        const { default: render } = m;
 
         if (typeof render !== 'function') {
-            log.error(`Expected a function but got ${render}. Check the default export in "containers/${container}".`);
+            log.error(`Expected a function but got ${render}. Check the default export in "widgets/${widget}".`);
             return undefined;
         }
 
