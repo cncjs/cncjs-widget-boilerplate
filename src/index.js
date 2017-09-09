@@ -1,10 +1,10 @@
 import controller from './lib/controller';
-import query from './lib/query';
+import qs from './lib/querystring';
 import log from './lib/log';
 import './styles/vendor.styl';
 import './styles/app.styl';
 
-const params = query.parse(window.location.search);
+const params = query.parse(window.location.search.slice(1));
 
 window.addEventListener('message', (event) => {
     // TODO: event.origin
