@@ -1,10 +1,14 @@
+import qs from 'qs';
 import controller from './lib/controller';
-import qs from './lib/querystring';
 import log from './lib/log';
 import './styles/vendor.styl';
 import './styles/app.styl';
 
-const params = query.parse(window.location.search.slice(1));
+// Query Parameters
+// * token (required): An authentication token to enable secure communication.
+// * host (optional): Specifies the host to connect to. Defaults to an empty string.
+// * widget (optional): Specifies a folder name under 'src/widgets'. Defaults to 'ReactApp'.
+const params = qs.parse(window.location.search.slice(1));
 
 window.addEventListener('message', (event) => {
     // TODO: event.origin
@@ -20,7 +24,8 @@ window.addEventListener('message', (event) => {
     }
 
     const { type, payload } = { ...action };
-    if (type === 'update') {
+    if (type === 'change') {
+        // Do not close the port if the port parameter is empty
         const { port } = { ...payload };
         port && controller.openPort(port);
     }
@@ -45,12 +50,12 @@ import(`./widgets/${widget}`)
         }
 
         // Connect to a socket.io server
-        const host = ''; // e.g. http://localhost:8000
+        const host = params.host || ''; // e.g. http://localhost:8000
         const options = {
             query: 'token=' + params.token
         };
         controller.connect(host, options, () => {
-            // Post a message to the parent window
+            // Use the postMessage API for inter-frame communication
             window.parent.postMessage({
                 token: params.token,
                 action: {

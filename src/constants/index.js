@@ -1,3 +1,7 @@
+// Metric and Imperial units
+export const IMPERIAL_UNITS = 'in';
+export const METRIC_UNITS = 'mm';
+
 // Controller
 export const GRBL = 'Grbl';
 export const SMOOTHIE = 'Smoothie';
