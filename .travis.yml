@@ -17,5 +17,24 @@ before_install:
   - npm --version
 
 after_success:
-  - npm run coveralls
-  - npm run coverage-clean
+  - PACKAGE_NAME=`scripts/package-name.sh package.json`
+  - PACKAGE_VERSION=`scripts/package-version.sh package.json`
+  - RELEASE=${PACKAGE_NAME}-${PACKAGE_VERSION}
+  - mkdir -p releases
+  - pushd dist
+  - zip -r ../releases/${RELEASE}.zip *
+  - popd
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "dDUmM/XOB/OZJMsheN2NWH7vW961cbNaHZVhDn1nSuWzVX29jpJONMeVaXCtnxjNl8JI9OgzpVFWOaqx9YKCDt6tuTLYuNOnZHxGLB/CaLpqnl4+YiDaEoTin+F+M3xncRAD0gEjOAVduIJx6F9tzjgTOei7fSC4Yt26bxtZPkxnJzJP90xxSQ04fCaQ85DAbpmBLSm/TlJwvKil5cLcOokvxhaQig/WnTRkXf4ZPEL+FQMgHiWEmWHGkmFOZk3kBdYo2cwYwuCy7JYxNt+Jlfk8BF4V2nSa30HLQjUl6L4QyOo/2TeQ8w90HKzGM1PmRRYP4vpZ21T0w/Ftq2b/+lOmpqIA3OmCZnwW/WoflvzOAbj2z5ZVd6s57R8qcZA68yiy1psFsvQpphgdIPMPAdWxAZa694tOVMxhm7sR1VPYT9ufdLoxWLtdPFm8Dta+7bt34P2o448Fl9AhcJl+P3nebZcLG7KM0eAbGHp5U1YGDiJfGIz44c+kSBd1+tH5nNnSQq0OaED/eO3E+rOLiKtpdts+rYGA70YxvjgEiWCr1OQH+JZPYpoSbH6qtIgDGr2Wt0fU4ANx61R+ukna8AluhfIgmalfTSma9CM6ewYavM7wkMstP29gdUWf2utkeGGleSQs/m6L6aPZoMzugLHU8z++YpkcWnLM7mEvaAs="
+  file_glob: true
+  file:
+    - 'releases/*.*'
+  overwrite: true
+  skip_cleanup: true
+  on:
+    # https://docs.travis-ci.com/user/deployment#Conditional-Releases-with-on
+    tags: true  # Deploy app only when a tag is applied to the commit
+    node: '6'
