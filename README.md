@@ -2,10 +2,6 @@
 
 ### Creating Custom Widgets for CNCjs
 
-## Under Construction
-
-This repository is still under construction and content may change. Do not rely on the information on this page. The custom widget support will soon be available. Stay tuned for further updates.
-
 ## Installation
 
 ```bash
