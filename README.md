@@ -2,6 +2,11 @@
 
 ### Creating Custom Widgets for CNCjs
 
+You can download a working example widget from the releases page:<br>
+https://github.com/cncjs/cncjs-widget-boilerplate/releases
+
+![image](https://user-images.githubusercontent.com/447801/30728860-bbccd270-9f8d-11e7-90e2-7777651bbb59.png)
+
 ## Installation
 
 ```bash
