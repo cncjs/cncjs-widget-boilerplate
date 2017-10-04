@@ -89,10 +89,13 @@ class App extends PureComponent {
             const initialState = this.getInitialState();
             this.setState({ ...initialState });
         },
-        'workflow:state': (workflowState) => {
-            if (this.state.workflowState !== workflowState) {
-                this.setState({ workflowState: workflowState });
-            }
+        'workflow:state': (state, context) => {
+            this.setState({
+                workflow: {
+                    state: state,
+                    context: context
+                }
+            });
         },
         'controller:state': (controllerType, controllerState) => {
             this.setState(state => ({
@@ -220,7 +223,10 @@ class App extends PureComponent {
                 type: controller.type,
                 state: controller.state
             },
-            workflowState: controller.workflowState,
+            workflow: {
+                state: controller.workflow.state,
+                context: controller.workflow.context
+            },
             machinePosition: { // Machine position
                 x: '0.000',
                 y: '0.000',
