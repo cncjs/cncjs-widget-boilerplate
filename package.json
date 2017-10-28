@@ -9,12 +9,12 @@
   "scripts": {
     "prepublish": "npm run eslint && npm test && npm run clean && npm run build",
     "build": "webpack --config webpack.config.js",
-    "clean": "rm -f dist/*",
+    "clean": "del-cli dist",
     "demo": "http-server -p 8080 dist",
     "eslint": "eslint ./src",
     "test": "tap test/*.js --node-arg=--require --node-arg=babel-register --node-arg=--require --node-arg=babel-polyfill",
     "coveralls": "tap test/*.js --coverage --coverage-report=text-lcov --nyc-arg=--require --nyc-arg=babel-register --nyc-arg=--require --nyc-arg=babel-polyfill | coveralls",
-    "dev": "NODE_ENV=development webpack-dev-server --hot --inline --host 0.0.0.0 --port 5000 --content-base dist",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --host 0.0.0.0 --port 5000 --content-base dist",
     "pack": ""
   },
   "repository": {
@@ -62,7 +62,9 @@
     "babel-preset-react": "~6.24.1",
     "babel-preset-stage-0": "~6.24.1",
     "coveralls": "~3.0.0",
+    "cross-env": "~5.1.1",
     "css-loader": "~0.28.7",
+    "del-cli": "~1.1.0",
     "eslint": "~4.10.0",
     "eslint-config-trendmicro": "~1.0.0",
     "eslint-loader": "~1.9.0",
