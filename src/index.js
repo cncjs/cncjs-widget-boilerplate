@@ -25,9 +25,17 @@ window.addEventListener('message', (event) => {
 
     const { type, payload } = { ...action };
     if (type === 'change') {
-        // Do not close the port if the port parameter is empty
-        const { port } = { ...payload };
-        port && controller.openPort(port);
+        const {
+            controller: { type: controllerType },
+            connection
+        } = { ...payload };
+
+        // Do not actively close connection if the connection ident is empty
+        if (connection.ident) {
+            controller.open(controllerType, connection.type, connection.settings, (err) => {
+                // TODO
+            });
+        }
     }
 });
 

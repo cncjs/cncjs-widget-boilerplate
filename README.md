@@ -2,6 +2,8 @@
 
 **Custom widget support is only available for CNCjs 1.9.10 or later versions**
 
+This branch is for CNCjs 2.0.0 or later versions. If you're looking for the previous version (>= 1.9.10), please visit the master branch.
+
 ## Installation
 
 ```bash
