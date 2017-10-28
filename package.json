@@ -9,7 +9,7 @@
   "scripts": {
     "prepublish": "npm run eslint && npm test && npm run clean && npm run build",
     "build": "webpack --config webpack.config.js",
-    "clean": "rm -f dist/*",
+    "clean": "del-cli dist",
     "demo": "http-server -p 8080 dist",
     "eslint": "eslint ./src",
     "test": "tap test/*.js --node-arg=--require --node-arg=babel-register --node-arg=--require --node-arg=babel-polyfill",
@@ -64,6 +64,7 @@
     "coveralls": "~2.13.1",
     "cross-env": "~5.1.1",
     "css-loader": "~0.28.7",
+    "del-cli": "~1.1.0",
     "eslint": "~4.7.1",
     "eslint-config-trendmicro": "~1.0.0",
     "eslint-loader": "~1.9.0",
