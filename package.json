@@ -14,7 +14,7 @@
     "eslint": "eslint ./src",
     "test": "tap test/*.js --node-arg=--require --node-arg=babel-register --node-arg=--require --node-arg=babel-polyfill",
     "coveralls": "tap test/*.js --coverage --coverage-report=text-lcov --nyc-arg=--require --nyc-arg=babel-register --nyc-arg=--require --nyc-arg=babel-polyfill | coveralls",
-    "dev": "NODE_ENV=development webpack-dev-server --hot --inline --host 0.0.0.0 --port 5000 --content-base dist",
+    "dev": "cross-env NODE_ENV=development webpack-dev-server --hot --inline --host 0.0.0.0 --port 5000 --content-base dist",
     "pack": ""
   },
   "repository": {
@@ -62,6 +62,7 @@
     "babel-preset-react": "~6.24.1",
     "babel-preset-stage-0": "~6.24.1",
     "coveralls": "~2.13.1",
+    "cross-env": "~5.1.1",
     "css-loader": "~0.28.7",
     "eslint": "~4.7.1",
     "eslint-config-trendmicro": "~1.0.0",
