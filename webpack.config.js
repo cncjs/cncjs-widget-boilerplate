@@ -7,6 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const stylusLoader = require('stylus-loader');
 const nib = require('nib');
 
+const outputPath = process.env.OUTPUT_PATH || 'dist';
 const timestamp = new Date().getTime();
 const webpackConfig = {
     entry: {
@@ -15,7 +16,7 @@ const webpackConfig = {
         ]
     },
     output: {
-        path: path.join(__dirname, 'dist'),
+        path: path.join(__dirname, outputPath),
         chunkFilename: `[name].bundle.js?_=${timestamp}`,
         filename: `[name].bundle.js?_=${timestamp}`
     },
@@ -113,7 +114,7 @@ if (process.env.NODE_ENV === 'development') {
             }
         }),
         new HtmlWebpackPlugin({
-            filename: path.join(__dirname, 'dist/index.html'),
+            filename: path.join(__dirname, outputPath, 'index.html'),
             template: path.join(__dirname, 'assets/index.html')
         })
     ];
@@ -150,7 +151,7 @@ if (process.env.NODE_ENV === 'development') {
             }
         }),
         new HtmlWebpackPlugin({
-            filename: path.join(__dirname, 'dist/index.html'),
+            filename: path.join(__dirname, outputPath, 'index.html'),
             template: path.join(__dirname, 'assets/index.html')
         })
     ];
