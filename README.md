@@ -1,6 +1,14 @@
 # cncjs-widget-boilerplate [![build status](https://travis-ci.org/cncjs/cncjs-widget-boilerplate.svg?branch=master)](https://travis-ci.org/cncjs/cncjs-widget-boilerplate) [![Coverage Status](https://coveralls.io/repos/github/cncjs/cncjs-widget-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/cncjs/cncjs-widget-boilerplate?branch=master)
 
-**Custom widget support is only available for CNCjs 1.9.10 or later versions**
+**Custom Widget for CNCjs**
+
+## Version Compatibility
+
+Custom Widget Version | CNCjs Version
+:-------------------- | :------------
+0.x                   | 1.9.10 or 1.9.11
+1.x                   | >=1.9.12 or later patch versions
+2.x                   | >=2.0.0 or later versions
 
 This branch is for CNCjs 2.0.0 or later versions. If you're looking for the previous version (>= 1.9.10), please visit the master branch.
 
