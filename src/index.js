@@ -1,4 +1,5 @@
 import qs from 'qs';
+import semver from 'semver';
 import ResizeObserver from './lib/ResizeObserver';
 import controller from './lib/controller';
 import log from './lib/log';
@@ -12,15 +13,23 @@ import './styles/app.styl';
 const params = qs.parse(window.location.search.slice(1));
 
 window.addEventListener('message', (event) => {
-    // TODO: event.origin
-
-    const { token, action } = { ...event.data };
+    const { token, version, action } = { ...event.data };
 
     // Token authentication
     if (token !== params.token) {
         if (process.env.NODE_ENV === 'production') {
             log.warn(`Received a message with an unauthorized token (${token}).`);
         }
+        return;
+    }
+
+    if (version && semver.satisfies(version, '<2.0.0')) {
+        const el = document.getElementById('viewport');
+        el.innerHTML = `
+            <div style="padding: 10px">
+                This widget is not compatible with CNCjs ${version}
+            </div>
+        `.trim();
         return;
     }
 
