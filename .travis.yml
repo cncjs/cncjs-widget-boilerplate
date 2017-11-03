@@ -17,6 +17,7 @@ before_install:
   - npm --version
 
 after_success:
+  - npm run deploy
   - PACKAGE_NAME=`scripts/package-name.sh package.json`
   - PACKAGE_VERSION=`scripts/package-version.sh package.json`
   - RELEASE=${PACKAGE_NAME}-${PACKAGE_VERSION}
