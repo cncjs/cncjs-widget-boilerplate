@@ -6,7 +6,8 @@ if [ "$TRAVIS" = "true" ]; then
     ./node_modules/.bin/gh-pages \
         --silent \
         --repo https://$GITHUB_TOKEN@github.com/cncjs/cncjs-widget-boilerplate.git \
+        --add \
         --dist dist
 else
-    ./node_modules/.bin/gh-pages --dist dist
+    ./node_modules/.bin/gh-pages --add --dist dist
 fi
