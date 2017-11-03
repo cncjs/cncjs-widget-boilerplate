@@ -11,13 +11,13 @@ const outputPath = process.env.OUTPUT_PATH || 'dist';
 const timestamp = new Date().getTime();
 const webpackConfig = {
     entry: {
-        index: [
+        app: [
             path.resolve(__dirname, 'src/index.js')
         ]
     },
     output: {
-        path: path.join(__dirname, outputPath),
-        chunkFilename: `[name].bundle.js?_=${timestamp}`,
+        path: path.resolve(__dirname, outputPath),
+        chunkFilename: `[name].chunk.js?_=${timestamp}`,
         filename: `[name].bundle.js?_=${timestamp}`
     },
     externals: []
@@ -114,8 +114,8 @@ if (process.env.NODE_ENV === 'development') {
             }
         }),
         new HtmlWebpackPlugin({
-            filename: path.join(__dirname, outputPath, 'index.html'),
-            template: path.join(__dirname, 'assets/index.html')
+            filename: path.resolve(__dirname, outputPath, 'index.html'),
+            template: path.resolve(__dirname, 'assets/index.html')
         })
     ];
 } else {
@@ -151,8 +151,8 @@ if (process.env.NODE_ENV === 'development') {
             }
         }),
         new HtmlWebpackPlugin({
-            filename: path.join(__dirname, outputPath, 'index.html'),
-            template: path.join(__dirname, 'assets/index.html')
+            filename: path.resolve(__dirname, outputPath, 'index.html'),
+            template: path.resolve(__dirname, 'assets/index.html')
         })
     ];
 }
