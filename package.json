@@ -7,10 +7,10 @@
     "dist"
   ],
   "scripts": {
-    "prepublish": "npm run eslint && npm test && npm run clean && npm run build && npm run build-docs",
+    "prepare": "npm run eslint && npm test && npm run clean && npm run build",
+    "build": "cross-env OUTPUT_PATH=dist/v1 webpack --config webpack.config.js",
     "clean": "del-cli dist",
-    "build": "cross-env OUTPUT_PATH=dist webpack --config webpack.config.js",
-    "build-docs": "cross-env OUTPUT_PATH=docs/v1 webpack --config webpack.config.js",
+    "deploy": "./scripts/deploy.sh",
     "demo": "http-server -p 8080 dist",
     "eslint": "eslint ./src",
     "test": "tap test/*.js --node-arg=--require --node-arg=babel-register --node-arg=--require --node-arg=babel-polyfill",
@@ -75,6 +75,7 @@
     "eslint-plugin-react": "~7.3.0",
     "file-loader": "~0.11.2",
     "find-imports": "~0.5.2",
+    "gh-pages": "~1.0.0",
     "html-webpack-plugin": "~2.30.1",
     "http-server": "~0.10.0",
     "nib": "~1.1.2",
