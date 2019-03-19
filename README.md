@@ -51,7 +51,7 @@ Run `npm run dev` to start a local development server for development, then conn
 
 You can specify a mount path to test your widgets with CNCjs:
 ```bash
-cnc -vv --mount /widget:/path/to/cncjs-widget-boilerplate/dist
+cncjs -vv --mount /widget:/path/to/cncjs-widget-boilerplate/dist
 ```
 
 ## Production
@@ -62,7 +62,7 @@ After that, you can copy all dist files to a directory (e.g. /home/widget), and 
 ```bash
 mkdir -p /home/widget
 cp -af /path/to/cncjs-widget-boilerplate/dist/* /home/widget
-cnc --mount /widget:/home/widget
+cncjs --mount /widget:/home/widget
 ```
 
 ### Configure CNCjs
