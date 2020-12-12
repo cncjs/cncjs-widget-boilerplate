@@ -40,9 +40,9 @@ class AdvancedMacro extends PureComponent {
             workflow,
             macros = []
         } = state;
-        //TODO remove || true
-        const canRunMacro = canClick && includes([WORKFLOW_STATE_IDLE, WORKFLOW_STATE_PAUSED], workflow.state) || true;
-        //const canLoadMacro = canClick && includes([WORKFLOW_STATE_IDLE], workflow.state);
+        //For debugging locally, add the || true
+        //const canRunMacro = canClick && includes([WORKFLOW_STATE_IDLE, WORKFLOW_STATE_PAUSED], workflow.state); //|| true;
+        const canRunMacro = canClick && includes([WORKFLOW_STATE_IDLE], workflow.state);
 
         return (
             <div>
