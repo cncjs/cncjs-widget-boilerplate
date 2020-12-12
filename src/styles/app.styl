@@ -1,11 +1,28 @@
-@import "reset-context";
+// ==========================================================================
+// Important Notice:
+// Responsive design with CSS3 media queries are not supported with
+// Internet Explorer versions before IE9.
+// ==========================================================================
 
-body {
-    reset-context();
+// Base styles
+@import "base";
 
-    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
-    font-size: 13px;
-    margin: 0;
-    color: #222222;
-    background-color: #ffffff;
-}
+// Style Portal
+@import "scaffolding";
+@import "scaffolding-bootstrap";
+@import "typography";
+
+// Bootstrap Helper
+@import "bootstrap-col-height";
+@import "bootstrap-no-gutters";
+@import "bootstrap-btn-select";
+@import "bootstrap-vertical-spacing";
+@import "bootstrap-override";
+
+// Helper classes
+@import "helper";
+
+// CSS Specific for Internet Explorer
+@import "ie";
+
+@import "table-form";
