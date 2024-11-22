@@ -1,4 +1,4 @@
-# cncjs-widget-boilerplate [![build status](https://travis-ci.org/cncjs/cncjs-widget-boilerplate.svg?branch=master)](https://travis-ci.org/cncjs/cncjs-widget-boilerplate) [![Coverage Status](https://coveralls.io/repos/github/cncjs/cncjs-widget-boilerplate/badge.svg?branch=master)](https://coveralls.io/github/cncjs/cncjs-widget-boilerplate?branch=master)
+# cncjs-widget-boilerplate
 
 **Custom Widget for CNCjs**
 
@@ -15,8 +15,7 @@ This branch is for CNCjs 2.0.0 or later versions. If you're looking for the prev
 ## Installation
 
 ```bash
-npm i -g npm # Upgrade NPM to the latest version
-npm install
+yarn install
 ```
 
 ## Development Guide
@@ -26,10 +25,10 @@ Create a directory under <b>src/widgets</b> and put your code in there.
 ```
 src/
    widgets/
-      MyApp/index.js
+      custom/index.jsx
 ```
 
-When connecting to a local development server, you can specify the "widget" query parameter within your browser to switch between widgets (e.g. `http://localhost:5000/?widget=MyApp`).
+Run `yarn dev` to start a development server.
 
 ### Query Parameters
 
@@ -37,13 +36,8 @@ Name | Description
 :--- | :----------
 token | (Required) An authentication token to enable secure communication. The token will be automatically set by CNCjs.
 host | (Optional) Specifies the host to connect to. Defaults to an empty string.
-widget | (Optional) Specifies a folder name under 'src/widgets'. Defaults to 'ReactApp'.
 
 ### Examples
-
-#### React App
-
-There is a widget written with React, you can download it from the releases page: https://github.com/cncjs/cncjs-widget-boilerplate/releases
 
 ![image](https://user-images.githubusercontent.com/447801/30728983-b866f4b6-9f8e-11e7-9a90-6b712344d270.png)
 
