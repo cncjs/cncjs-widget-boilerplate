@@ -1,6 +1,6 @@
 import get from 'lodash.get';
 import mapValues from 'lodash.mapvalues';
-import React, { PureComponent } from 'react';
+import { PureComponent } from 'react';
 import styled from 'styled-components';
 import controller from '../../lib/controller';
 import {
