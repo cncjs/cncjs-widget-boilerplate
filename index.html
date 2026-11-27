@@ -18,11 +18,15 @@ html {
   color-scheme: light dark;
   color: CanvasText;
   background-color: Canvas;
-  --panel-color: #fff;
-  --panel-header-color: #fafafa;
-  --field-color: #f5f5f5;
-  --border-color: #ccc;
-  --field-border-color: #e3e3e3;
+}
+@media (prefers-color-scheme: light) {
+  html {
+    --panel-color: #fff;
+    --panel-header-color: #fafafa;
+    --field-color: #f5f5f5;
+    --border-color: #ccc;
+    --field-border-color: #e3e3e3;
+  }
 }
 @media (prefers-color-scheme: dark) {
   html {
