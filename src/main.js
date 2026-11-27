@@ -10,6 +10,10 @@ import * as customWidget from './widgets/custom';
 const params = qs.parse(window.location.search.slice(1));
 
 window.addEventListener('message', (event) => {
+  if (window.parent === window || event.source !== window.parent) {
+    return;
+  }
+
   const { token, version, action } = { ...event.data };
 
   // Token authentication
@@ -18,17 +22,17 @@ window.addEventListener('message', (event) => {
     return;
   }
 
-  if (version && semver.satisfies(version, '<1.9.10 || >=2.0.0')) {
-    const el = document.getElementById('viewport');
-    el.innerHTML = `
-      <div style="padding: 10px">
-        This widget is not compatible with CNCjs ${version}
-      </div>
-    `.trim();
+  if (version && !semver.satisfies(version, '>=2.0.0-0', { includePrerelease: true })) {
+    const el = document.getElementById('root');
+    el.textContent = `This widget is not compatible with CNCjs ${version}`;
     return;
   }
 
   const { type, payload } = { ...action };
+  if ((type === 'change' || type === 'widget:fullscreenchange') && typeof payload?.fullscreen === 'boolean') {
+    document.documentElement.classList.toggle('widget-fullscreen', payload.fullscreen);
+  }
+
   if (type === 'change') {
     const {
       controller: { type: controllerType },
