@@ -39,7 +39,7 @@ host | (Optional) Specifies the host to connect to. Defaults to an empty string.
 
 The boilerplate accepts `widget:state` messages with `payload: { fullscreen: boolean }` independently of the `change` message used for port selection. Both the initial state and later transitions toggle `html.widget-fullscreen` so you can adapt the layout; missing or non-boolean values leave it alone. State and port messages can arrive in either order. This is CNCjs widget fullscreen, not the browser Fullscreen API.
 
-Temporary compatibility with the currently shipped host is retained: `change.payload.fullscreen` and `widget:fullscreenchange` update fullscreen until the first valid `widget:state` is received. After that, only `widget:state` updates fullscreen, so legacy messages cannot overwrite the new state. Legacy `change` messages still select the port as before. Hosts that omit fullscreen leave the layout alone.
+Only `widget:state` updates fullscreen: `change.payload.fullscreen` and `widget:fullscreenchange` are ignored. The `change` message still selects the port as before. Fullscreen synchronization requires the companion CNCjs master sender rollout (item 28) to emit `widget:state` for both the initial state and later transitions; hosts using the old fullscreen messages will not synchronize the layout.
 
 The widget follows the iframe's [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#embedded_elements) in CSS. If you need the current mode in JavaScript, read `window.matchMedia('(prefers-color-scheme: dark)').matches` and listen for `change` on that media query. No CNCjs theme message or parent HTML attribute is needed.
 

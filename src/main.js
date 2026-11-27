@@ -9,7 +9,6 @@ import * as customWidget from './widgets/custom';
 // * token (required): An authentication token to enable secure communication.
 // * host (optional): Specifies the host to connect to. Defaults to an empty string.
 const params = qs.parse(window.location.search.slice(1));
-let hasWidgetState = false;
 
 window.addEventListener('message', (event) => {
   if (window.parent === window || event.source !== window.parent) {
@@ -36,10 +35,6 @@ window.addEventListener('message', (event) => {
 
   const { type, payload } = { ...action };
   if (type === 'widget:state' && typeof payload?.fullscreen === 'boolean') {
-    hasWidgetState = true;
-    document.documentElement.classList.toggle('widget-fullscreen', payload.fullscreen);
-  } else if (!hasWidgetState && (type === 'change' || type === 'widget:fullscreenchange') && typeof payload?.fullscreen === 'boolean') {
-    // Temporary compatibility with hosts that have not adopted widget:state.
     document.documentElement.classList.toggle('widget-fullscreen', payload.fullscreen);
   }
 

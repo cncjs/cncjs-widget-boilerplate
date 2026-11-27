@@ -88,51 +88,54 @@ for (const stateFirst of [false, true]) {
   });
 }
 
-test('missing and invalid fullscreen do not change state or activate precedence', () => {
+test('missing and invalid fullscreen leave the current state alone', () => {
   for (const payload of [undefined, null, {}, { fullscreen: undefined },
     { fullscreen: null }, { fullscreen: 0 }, { fullscreen: 1 },
     { fullscreen: 'true' }, { fullscreen: 'false' }]) {
     const widget = setup();
     widget.send('widget:state', payload);
     assert.equal(widget.fullscreen(), false);
-    widget.send('change', { fullscreen: true });
+    widget.send('widget:state', { fullscreen: true });
     assert.equal(widget.fullscreen(), true);
     for (const type of ['widget:state', 'change', 'widget:fullscreenchange']) {
       widget.send(type, payload);
       assert.equal(widget.fullscreen(), true);
     }
     widget.send('widget:fullscreenchange', { fullscreen: false });
-    assert.equal(widget.fullscreen(), false);
+    assert.equal(widget.fullscreen(), true);
   }
 });
 
-test('currently shipped host handshake and legacy fullscreen remain supported', () => {
+test('connect and port handling remain unchanged while old fullscreen formats are ignored', () => {
   const widget = setup({ initial: true });
   assert.equal(widget.replies.length, 1);
   assert.equal(widget.replies[0].action.type, 'connect');
   assert.equal(widget.replies[0].token, 'secret');
   widget.send('change', { port: '/dev/ttyUSB0', fullscreen: false });
-  assert.equal(widget.fullscreen(), false);
+  assert.equal(widget.fullscreen(), true);
   widget.send('widget:fullscreenchange', { fullscreen: true });
   assert.equal(widget.fullscreen(), true);
   widget.send('widget:fullscreenchange', { fullscreen: false });
-  assert.equal(widget.fullscreen(), false);
+  assert.equal(widget.fullscreen(), true);
   widget.send('change', { port: '/dev/ttyUSB1' });
   widget.send('change', { port: '' });
   widget.send('change');
-  assert.equal(widget.fullscreen(), false);
+  assert.equal(widget.fullscreen(), true);
   assert.deepEqual(widget.ports, ['/dev/ttyUSB0', '/dev/ttyUSB1']);
 });
 
-test('invalid state cannot reset new protocol precedence', () => {
-  const widget = setup();
-  widget.send('widget:state', { fullscreen: true });
-  widget.send('widget:state', { fullscreen: 'false' });
-  widget.send('widget:state');
-  widget.send('change', { fullscreen: false });
-  widget.send('widget:fullscreenchange', { fullscreen: false });
-  assert.equal(widget.fullscreen(), true);
-});
+for (const initial of [false, true]) {
+  test(`old fullscreen formats are ignored before and after state with initial=${initial}`, () => {
+    const widget = setup({ initial });
+    for (const afterState of [false, true]) {
+      if (afterState) widget.send('widget:state', { fullscreen: initial });
+      for (const type of ['change', 'widget:fullscreenchange']) {
+        widget.send(type, { fullscreen: !initial });
+        assert.equal(widget.fullscreen(), initial);
+      }
+    }
+  });
+}
 
 test('version gate still rejects incompatible controller changes', () => {
   for (const version of ['1.9.9', '2.0.0']) {
@@ -158,7 +161,7 @@ test('source, token, and existing version gates also protect widget state', () =
     const widget = setup();
     widget.send('widget:state', { fullscreen: true }, envelope);
     assert.equal(widget.fullscreen(), false);
-    widget.send('change', { fullscreen: true });
+    widget.send('widget:state', { fullscreen: true });
     assert.equal(widget.fullscreen(), true);
   }
   const widget = setup({ standalone: true });
