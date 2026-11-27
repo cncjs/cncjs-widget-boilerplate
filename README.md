@@ -39,7 +39,9 @@ host | (Optional) Specifies the host to connect to. Defaults to an empty string.
 
 ### Fullscreen and color mode
 
-When the CNCjs host supports widget fullscreen notifications, the initial `change` reply includes `payload.fullscreen`. Later `widget:fullscreenchange` messages also carry that boolean. The boilerplate toggles `html.widget-fullscreen` so you can adapt the layout. Hosts that do not send the field continue to use the default layout. This is CNCjs widget fullscreen, not the browser Fullscreen API.
+When the CNCjs host supports widget state notifications, independent `widget:state` messages carry `payload: { fullscreen: boolean }` on initial connection, reconnect, and fullscreen transitions. The boilerplate toggles `html.widget-fullscreen` so you can adapt the layout, including clearing the class when `fullscreen` is false. Missing or non-boolean values leave the current layout unchanged. The `change` action handles controller and connection metadata separately; either message may arrive first. Hosts that do not send `widget:state` continue to use the default layout. This is CNCjs widget fullscreen, not the browser Fullscreen API.
+
+Host support is being added in [cncjs/cncjs#1066](https://github.com/cncjs/cncjs/pull/1066) targeting `next`. This v2 receiver requires that protocol; it does not consume fullscreen values from `change` or the legacy `widget:fullscreenchange` action.
 
 The widget follows the iframe's [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#embedded_elements) in CSS. If you need the current mode in JavaScript, read `window.matchMedia('(prefers-color-scheme: dark)').matches` and listen for `change` on that media query. No CNCjs theme message or parent HTML attribute is needed.
 
