@@ -11,6 +11,10 @@ import * as customWidget from './widgets/custom';
 const params = qs.parse(window.location.search.slice(1));
 
 window.addEventListener('message', (event) => {
+  if (window.parent === window || event.source !== window.parent) {
+    return;
+  }
+
   const { token, version, action } = { ...event.data };
 
   // Token authentication
@@ -30,6 +34,10 @@ window.addEventListener('message', (event) => {
   }
 
   const { type, payload } = { ...action };
+  if ((type === 'change' || type === 'widget:fullscreenchange') && typeof payload?.fullscreen === 'boolean') {
+    document.documentElement.classList.toggle('widget-fullscreen', payload.fullscreen);
+  }
+
   if (type === 'change') {
     // Do not close the port if the port parameter is empty
     const { port } = { ...payload };
