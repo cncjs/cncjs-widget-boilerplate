@@ -22,17 +22,16 @@ const Container = styled.div`
 `;
 
 const Panel = styled.div`
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--panel-color);
+    border: 1px solid var(--border-color);
     box-shadow: 0 1px 1px rgba(0, 0, 0, .05);
 `;
 
 const PanelHeader = styled.div`
-    color: #333;
     font-weight: bold;
-    background-color: #fafafa;
+    background-color: var(--panel-header-color);
     padding: 5px 10px;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid var(--border-color);
 `;
 
 const PanelBody = styled.div`
@@ -67,12 +66,17 @@ const TextFieldContent = styled.div`
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
-    background-color: #f5f5f5;
-    border: 1px solid #e3e3e3;
+    background-color: var(--field-color);
+    border: 1px solid var(--field-border-color);
     border-radius: 3px;
     box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
     margin-bottom: 0;
     padding: 0 5px;
+
+    html.widget-fullscreen & {
+        white-space: normal;
+        overflow-wrap: anywhere;
+    }
 `;
 
 class App extends PureComponent {
@@ -253,7 +257,7 @@ class App extends PureComponent {
 
         if (!port) {
             return (
-                <Container style={{ color: '#333', opacity: '.65' }}>
+                <Container style={{ opacity: '.65' }}>
                     No serial connection
                 </Container>
             );

@@ -35,6 +35,12 @@ Name | Description
 token | (Required) An authentication token to enable secure communication. The token will be automatically set by CNCjs.
 host | (Optional) Specifies the host to connect to. Defaults to an empty string.
 
+### Fullscreen and color mode
+
+On CNCjs versions that support widget fullscreen notifications, the initial `change` reply includes `payload.fullscreen`. Later `widget:fullscreenchange` messages also carry that boolean. The boilerplate toggles `html.widget-fullscreen` so you can adapt the layout. Older hosts can omit the field; port changes without it leave the layout alone. This is CNCjs widget fullscreen, not the browser Fullscreen API.
+
+The widget follows the iframe's [`prefers-color-scheme`](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#embedded_elements) in CSS. If you need the current mode in JavaScript, read `window.matchMedia('(prefers-color-scheme: dark)').matches` and listen for `change` on that media query. No CNCjs theme message or parent HTML attribute is needed.
+
 ### Examples
 
 ![image](https://user-images.githubusercontent.com/447801/30728983-b866f4b6-9f8e-11e7-9a90-6b712344d270.png)
