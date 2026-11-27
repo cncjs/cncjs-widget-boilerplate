@@ -17,6 +17,7 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
+    "test": "node --test",
     "preview": "vite preview",
     "clean": "del dist",
     "demo": "http-server -p 8080 dist",

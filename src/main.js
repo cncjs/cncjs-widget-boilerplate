@@ -34,7 +34,7 @@ window.addEventListener('message', (event) => {
   }
 
   const { type, payload } = { ...action };
-  if ((type === 'change' || type === 'widget:fullscreenchange') && typeof payload?.fullscreen === 'boolean') {
+  if (type === 'widget:state' && typeof payload?.fullscreen === 'boolean') {
     document.documentElement.classList.toggle('widget-fullscreen', payload.fullscreen);
   }
 
